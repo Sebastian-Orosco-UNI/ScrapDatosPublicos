@@ -25,15 +25,15 @@ driver.get('https://www.sbs.gob.pe/app/pp/EstadisticasSAEEPortal/Paginas/TIActiv
 wait = WebDriverWait(driver, 10)
 
 # Establecer fecha
-nueva_fecha = '02/05/2024'
-fecha_input = wait.until(EC.presence_of_element_located((By.ID, 'ctl00_cphContent_rdpDate_dateInput')))
-fecha_input.clear()
-fecha_input.send_keys(nueva_fecha)
+#nueva_fecha = '02/05/2024'
+#fecha_input = wait.until(EC.presence_of_element_located((By.ID, 'ctl00_cphContent_rdpDate_dateInput')))
+#fecha_input.clear()
+#fecha_input.send_keys(nueva_fecha)
 
 # Hacer clic en Consultar
-boton_consultar = wait.until(EC.element_to_be_clickable((By.ID, 'ctl00_cphContent_btnConsultar')))
-boton_consultar.click()
-time.sleep(2)
+#boton_consultar = wait.until(EC.element_to_be_clickable((By.ID, 'ctl00_cphContent_btnConsultar')))
+#boton_consultar.click()
+#time.sleep(2)
 
 # IDs a consultar
 ids = {
