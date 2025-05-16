@@ -67,6 +67,7 @@ data = [
 df = pd.DataFrame(data, columns=['fecha_consulta', 'tipo_interes', 'valor', 'unidad', 'frecuencia', 'fuente'])
 
 # Guardar CSV
-nombre_archivo = f"tasas_{fecha_consulta_f}.csv"
+os.makedirs('historial', exist_ok=True)
+nombre_archivo = os.path.join('historial', f"tasas_{fecha_consulta_f}.csv")
 df.to_csv(nombre_archivo, index=False, encoding='utf-8-sig')
 print("Archivo " + nombre_archivo + " generado correctamente.")
