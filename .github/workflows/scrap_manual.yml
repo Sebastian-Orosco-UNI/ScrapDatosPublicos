@@ -33,6 +33,6 @@ while current <= end:
     fecha = current.strftime('%d/%m/%Y')
     print(f'Procesando: {fecha}')
     os.environ['FECHA_CONSULTA'] = fecha
-    os.system('python scraping_sbs.py')
+    os.system('python scrapersbs.py')
     current += timedelta(days=1)
 "
