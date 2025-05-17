@@ -24,25 +24,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Ejecutar script iterativo con fechas
+      - name: Ejecutar run_manual_scraper.py con fechas
         run: |
-          python - <<EOF
-import os
-from datetime import datetime, timedelta
-
-start = datetime.strptime("${{ github.event.inputs.fecha_inicio }}", "%d/%m/%Y")
-end = datetime.strptime("${{ github.event.inputs.fecha_fin }}", "%d/%m/%Y")
-current = start
-
-print(f"Rango de fechas: {start.strftime('%d/%m/%Y')} a {end.strftime('%d/%m/%Y')}")
-
-while current <= end:
-    fecha = current.strftime('%d/%m/%Y')
-    print(f"Procesando: {fecha}")
-    os.environ['FECHA_CONSULTA'] = fecha
-    os.system("python scrapersbs.py")
-    current += timedelta(days=1)
-EOF
+          python run_manual_scraper.py "${{ github.event.inputs.fecha_inicio }}" "${{ github.event.inputs.fecha_fin }}"
 
       - name: Verificar archivos generados
         run: ls -R historial/ || echo "No se encontraron archivos en historial/"
