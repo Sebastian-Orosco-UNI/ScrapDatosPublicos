@@ -23,16 +23,16 @@ jobs:
         run: pip install -r requirements.txt
       - name: Ejecutar script iterativo con fechas
         run: |
-          python -c "
+          python -c '
 import os
 from datetime import datetime, timedelta
-start = datetime.strptime('${{ github.event.inputs.fecha_inicio }}', '%d/%m/%Y')
-end = datetime.strptime('${{ github.event.inputs.fecha_fin }}', '%d/%m/%Y')
+start = datetime.strptime("${{ github.event.inputs.fecha_inicio }}", "%d/%m/%Y")
+end = datetime.strptime("${{ github.event.inputs.fecha_fin }}", "%d/%m/%Y")
 current = start
 while current <= end:
-    fecha = current.strftime('%d/%m/%Y')
-    print(f'Procesando: {fecha}')
-    os.environ['FECHA_CONSULTA'] = fecha
-    os.system('python scrapersbs.py')
+    fecha = current.strftime("%d/%m/%Y")
+    print(f"Procesando: {fecha}")
+    os.environ["FECHA_CONSULTA"] = fecha
+    os.system("python scrapersbs.py")
     current += timedelta(days=1)
-"
+'
