@@ -25,7 +25,9 @@ driver.get('https://www.sbs.gob.pe/app/pp/EstadisticasSAEEPortal/Paginas/TIActiv
 wait = WebDriverWait(driver, 10)
 
 # Establecer fecha
-nueva_fecha = '12/05/2025'
+nueva_fecha = os.getenv('FECHA_CONSULTA')
+if not nueva_fecha:
+    nueva_fecha = datetime.now().strftime('%d/%m/%Y')
 fecha_input = wait.until(EC.presence_of_element_located((By.ID, 'ctl00_cphContent_rdpDate_dateInput')))
 fecha_input.clear()
 fecha_input.send_keys(nueva_fecha)
