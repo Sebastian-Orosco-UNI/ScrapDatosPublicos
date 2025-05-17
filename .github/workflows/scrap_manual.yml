@@ -1,4 +1,4 @@
-name: Scraping manual SBS
+name: Scraping Manual
 
 on:
   workflow_dispatch:
