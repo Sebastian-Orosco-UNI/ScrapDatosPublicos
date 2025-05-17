@@ -1,0 +1,38 @@
+name: Scraping manual SBS
+
+on:
+  workflow_dispatch:
+    inputs:
+      fecha_inicio:
+        description: 'Fecha inicio (dd/mm/yyyy)'
+        required: true
+      fecha_fin:
+        description: 'Fecha fin (dd/mm/yyyy)'
+        required: true
+
+jobs:
+  run-manual-scraper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Ejecutar script iterativo con fechas
+        run: |
+          python -c "
+import os
+from datetime import datetime, timedelta
+start = datetime.strptime('${{ github.event.inputs.fecha_inicio }}', '%d/%m/%Y')
+end = datetime.strptime('${{ github.event.inputs.fecha_fin }}', '%d/%m/%Y')
+current = start
+while current <= end:
+    fecha = current.strftime('%d/%m/%Y')
+    print(f'Procesando: {fecha}')
+    os.environ['FECHA_CONSULTA'] = fecha
+    os.system('python scraping_sbs.py')
+    current += timedelta(days=1)
+"
