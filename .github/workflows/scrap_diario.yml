@@ -1,7 +1,7 @@
 name: Scraping Diario
 
 on:
-  schedule:
+  schedul:
     - cron: '0 12 * * *'  # Todos los días a las 12:00 UTC
   workflow_dispatch:      # También permite ejecutarlo manualmente
 
